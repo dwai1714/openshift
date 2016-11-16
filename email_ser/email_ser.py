@@ -72,6 +72,7 @@ def send_email():
     content = request.json
     try:
         toadd = content["toadd"]
+        password = content["password"]
     except:
         resp = Response("One Address is Required", status=400, mimetype='application/json')
         return resp
@@ -81,7 +82,7 @@ def send_email():
     body = content.get("body" , " ")
 
     try:
-        if (send_mail.send_gmail_message(toadd, subject, dir, filename, body)) == False:
+        if (send_mail.send_gmail_message(toadd, password, subject, dir, filename, body)) == False:
             resp = Response("Attachment Missing", status=400, mimetype='application/json')
         else:
             resp = Response("Mail Sent", status=200, mimetype='application/json')
@@ -103,3 +104,4 @@ IOLoop.instance().start()
 # 	"dir":"/tmjp/",
 # 	"filename":"1.pdf"
 # }
+#curl -H "Content-Type: application/json" -X POST -d '{"toadd":["dwaip.chowdhury@accionlabs.com", "dwaip@yahoo.com"], "subject":"Sent from email Service", "body" : "Lets see if this works"}' http://restful-restful.44fs.preview.openshiftapps.com/api/v1/email
