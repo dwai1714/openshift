@@ -2,14 +2,14 @@ version: '2'
 services:
 
   api-email:
-    build: ./email_ser
+    build: ./email_ser/.
     #container_name: app1
     ports:
      - "9008"
     volumes:
      - /code
   api-upload:
-    build: ./upload_ser
+    build: ./upload_ser/.
     #container_name: app1
     ports:
      - "9009"
