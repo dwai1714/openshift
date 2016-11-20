@@ -62,6 +62,17 @@ def crossdomain(origin=None, methods=None, headers=None,
         return update_wrapper(wrapped_function, f)
     return decorator
 
+@app.route('/status', methods=['GET'])
+@crossdomain(origin='*')
+def health():
+    from flask import request, jsonify
+
+    try:
+        return Response("health OK", status=200, mimetype='application/json')
+    except:
+       return Response("health Not OK", status=400, mimetype='application/json')
+
+
 @app.route('/api/v1/email', methods=['POST'])
 @crossdomain(origin='*')
 
@@ -71,10 +82,11 @@ def send_email():
     import send_mail
     content = request.json
     try:
+        fromaddr = content["fromaddr"]
         toadd = content["toadd"]
         password = content["password"]
     except:
-        resp = Response("One Address is Required", status=400, mimetype='application/json')
+        resp = Response("From Address, To Address and Password are Required", status=400, mimetype='application/json')
         return resp
     subject = content.get("subject" , "No Subject")
     filename = content.get("filename", 0)
@@ -82,7 +94,7 @@ def send_email():
     body = content.get("body" , " ")
 
     try:
-        if (send_mail.send_gmail_message(toadd, password, subject, dir, filename, body)) == False:
+        if (send_mail.send_gmail_message(toadd, fromaddr,password, subject, dir, filename, body)) == False:
             resp = Response("Attachment Missing", status=400, mimetype='application/json')
         else:
             resp = Response("Mail Sent", status=200, mimetype='application/json')

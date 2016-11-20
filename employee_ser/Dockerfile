@@ -28,6 +28,6 @@ CMD mkdir /tmp
 
 #EXPOSE 8080
 #COPY ./app /app
-CMD /bin/containerpilot python email_ser.py
+CMD /bin/containerpilot python employee_ser.py
 #CMD ["python", "email_ser.py"]
-EXPOSE 9008
+EXPOSE 9001

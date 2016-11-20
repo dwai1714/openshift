@@ -66,6 +66,15 @@ def crossdomain(origin=None, methods=None, headers=None,
     return decorator
 
 
+@app.route('/status', methods=['GET'])
+@crossdomain(origin='*')
+def health():
+    from flask import request, jsonify
+
+    try:
+        return Response("health OK", status=200, mimetype='application/json')
+    except:
+       return Response("health Not OK", status=400, mimetype='application/json')
 
 @app.route('/api/v1/fileupload', methods=['POST'])
 @crossdomain(origin='*')

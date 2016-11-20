@@ -1,17 +1,69 @@
-version: '2'
-services:
+# Load Balancing
+consul:
+  image: progrium/consul:latest
+  command: -server -bootstrap -ui-dir /ui
+  restart: always
+  mem_limit: 128m
+  ports:
+    - 8500:8500
+  expose:
+    - 53
+    - 8300
+    - 8301
+    - 8302
+    - 8400
+    - 8500
 
-  api-email:
-    build: ./email_ser/.
-    #container_name: app1
-    ports:
-     - "9008"
-    volumes:
-     - /code
-  api-upload:
-    build: ./upload_ser/.
-    #container_name: app1
-    ports:
-     - "9009"
-    volumes:
-     - /code
+
+nginx-lb:
+  build: nginx/
+  ports:
+    - 9001:9001
+    - 9008:9008
+    - 9009:9009
+  expose:
+    - 9001
+    - 9008
+    - 9009
+  links:
+    - consul:consul
+  restart: always
+  command: >
+      /bin/containerpilot
+      -config file:///etc/containerpilot/containerpilot.json
+      nginx -g "daemon off;"
+  volumes:
+      - /tmp
+
+
+api-email:
+  build: email_ser/
+  #container_name: app1
+  ports:
+    - "9008"
+  links:
+    - consul
+  volumes_from:
+    - nginx-lb
+
+
+api-upload:
+  build: upload_ser/
+  #container_name: app1
+  ports:
+    - "9009"
+  links:
+    - consul
+  volumes_from:
+    - nginx-lb
+
+api-employee:
+  build: employee_ser/
+  #container_name: app1
+  ports:
+    - "9001"
+  links:
+    - consul
+  volumes_from:
+    - nginx-lb
+

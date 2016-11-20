@@ -1,0 +1,35 @@
+{
+  "consul": "consul:8500",
+  "preStart": "/bin/reload-nginx.sh preStart",
+  "logging": {
+    "level": "DEBUG",
+    "format": "text"
+  },
+  "services": [
+    {
+      "name": "nginx",
+      "port": 80,
+      "interfaces": ["eth1", "eth0"],
+      "health": "/usr/bin/curl -o /dev/null --fail -s http://146.20.69.53/health",
+      "poll": 10,
+      "ttl": 25
+    }
+  ],
+  "backends": [
+    {
+      "name": "email-9008",
+      "poll": 4,
+      "onChange": "/bin/reload-nginx.sh onChange"
+    },
+    {
+      "name": "upload-9009",
+      "poll": 4,
+      "onChange": "/bin/reload-nginx.sh onChange"
+    },
+    {
+      "name": "employee-9001",
+      "poll": 4,
+      "onChange": "/bin/reload-nginx.sh onChange"
+    }
+  ]
+}

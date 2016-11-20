@@ -1,11 +1,11 @@
-def send_gmail_message(toadd,password,subject,dir,filename,body = ''):
+def send_gmail_message(toadd,fromaddr,password,subject,dir,filename,body):
     import smtplib
     from email import encoders
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
     from email.mime.base import MIMEBase
 
-    fromaddr = "dwaip.chowdhury@accionlabs.com"
+    #fromaddr = "rackspace.accion@gmail.com"
 
 
     msg = MIMEMultipart()
