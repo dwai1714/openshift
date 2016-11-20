@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-MONGO_URI = "mongodb://dwaip:Accion123@ds049496.mlab.com:49496/accion_rackspace"
+MONGO_URI = "mongodb://dwaip:dwaip123@ds049496.mlab.com:49496/accion_rackspace"
 
 def get_mongo_conn():
     from pymongo import MongoClient
