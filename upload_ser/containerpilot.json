@@ -4,7 +4,7 @@
     {
       "name": "upload-9009",
       "port": 9009,
-      "health": "/usr/bin/curl -o /dev/null -s http://146.20.69.53:9009/status",
+      "health": "/usr/bin/curl -o /dev/null -s http://localhost:9009/status",
       "poll": 3,
       "ttl": 10
     }

@@ -4,7 +4,7 @@
     {
       "name": "email-9008",
       "port": 9008,
-      "health": "/usr/bin/curl -o /dev/null -s http://146.20.69.53:9008/status",
+      "health": "/usr/bin/curl -o /dev/null -s http://localhost:9008/status",
       "poll": 5,
       "ttl": 60
     }

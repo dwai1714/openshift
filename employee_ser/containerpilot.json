@@ -4,7 +4,7 @@
     {
       "name": "employee-9001",
       "port": 9001,
-      "health": "/usr/bin/curl -o /dev/null -s http://146.20.69.53:9001/api/v1/status",
+      "health": "/usr/bin/curl -o /dev/null -s http://localhost:9001/api/v1/status",
       "poll": 3,
       "ttl": 60
     }

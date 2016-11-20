@@ -19,7 +19,7 @@ http {
         location /health {
             # requires http_stub_status_module
             stub_status;
-            allow 146.20.69.53;
+            allow localhost;
             deny all;
         }
     }
