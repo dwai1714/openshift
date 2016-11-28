@@ -27,4 +27,4 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # add Nginx virtualhost template that we'll overwrite
 COPY nginx.conf.ctmpl /etc/containerpilot/nginx.conf.ctmpl
 
-EXPOSE 9008 9009
+EXPOSE 9008 9009 9001

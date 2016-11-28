@@ -66,9 +66,11 @@ def crossdomain(origin=None, methods=None, headers=None,
 @crossdomain(origin='*')
 def health():
     from flask import request, jsonify
+    import socket
+    hostname = socket.gethostname()
 
     try:
-        return Response("health OK", status=200, mimetype='application/json')
+        return Response("health OK "+ hostname, status=200, mimetype='application/json')
     except:
        return Response("health Not OK", status=400, mimetype='application/json')
 

@@ -37,8 +37,14 @@ services:
     build: nginx/
     ports:
       - 9008:9008
+      - 9009:9009
+      - 9001:9001
+      - 8080:8080
     expose:
       - 9008
+      - 9009
+      - 9001
+      - 8080
     links:
       - consul
     restart: always
@@ -55,6 +61,28 @@ services:
     #container_name: app1
     ports:
       - "9008"
+    links:
+      - consul
+      - nginx-lb
+    volumes_from:
+      - nginx-lb
+
+  api-employee:
+    build: employee_ser/
+    #container_name: app1
+    ports:
+      - "9001"
+    links:
+      - consul
+      - nginx-lb
+    volumes_from:
+      - nginx-lb
+
+  api-upload:
+    build: upload_ser/
+    #container_name: app1
+    ports:
+      - "9009"
     links:
       - consul
       - nginx-lb
