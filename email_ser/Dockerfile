@@ -30,4 +30,4 @@ CMD mkdir /tmp
 #COPY ./app /app
 CMD /bin/containerpilot python email_ser.py
 #CMD ["python", "email_ser.py"]
-EXPOSE 9008
+EXPOSE 8080
