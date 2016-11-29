@@ -26,8 +26,8 @@ CMD mkdir /tmp
 #CMD gunicorn api:app -b 0.0.0.0:8000
 #CMD ls; echo $EVE_SETTINGS
 
-EXPOSE 8080
+#EXPOSE 8080
 #COPY ./app /app
 CMD /bin/containerpilot python email_ser.py
 #CMD ["python", "email_ser.py"]
-#EXPOSE 9008
+EXPOSE 9008
