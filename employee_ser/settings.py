@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-MONGO_URI = "mongodb://dwaip:Accion123@ds049496.mlab.com:49496/accion_rackspace"
+MONGO_URI = "mongodb://dwaipayan:dwaip123@ds119738.mlab.com:19738/openshift"
 
-def get_mongo_conn():
-    from pymongo import MongoClient
-    conn = MongoClient(MONGO_URI)
-    db = conn['accion_rackspace']
-    return db
 
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
